@@ -18,6 +18,9 @@ node_modules
 # misc
 .DS_Store
 *.pem
+.env
+.env.development
+.env.production
 
 # debug
 npm-debug.log*
