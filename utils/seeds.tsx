@@ -55,11 +55,11 @@ export const footerList1 = [
   "Creator Directory",
 ];
 export const footerList2 = [
-  "TikTik for Good",
+  "WeLogger for Good",
   "Advertise",
   "Developers",
   "Transparency",
-  "TikTik Rewards",
+  "WeLogger Rewards",
 ];
 export const footerList3 = [
   "Help",
