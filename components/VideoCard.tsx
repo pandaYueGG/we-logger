@@ -32,14 +32,14 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
     <div className="flex flex-col border-b-2 border-gray-200 pb-4">
       <div>
         <div className="flex gap-3 p-2 cursor-pointer font-semibold roundex">
-          <div className="md:w-16 md:h-16 w-12 h-12">
+          <div className="md:w-16 md:h-16 w-10 h-12">
             <Link href="/">
               <>
                 <Image
                   width={60}
                   height={60}
                   className="rounded-full"
-                  src={post.postedBy.image}
+                  src={post.postedBy?.image}
                   alt="Profile Avatar"
                   layout="responsive"
                 />
@@ -50,12 +50,12 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
             <Link href="/">
               <div className="flex items-center gap-2">
                 <p className="flex items-center gap-2 md:text-md font-bold text-primary">
-                  {post.postedBy.userName}
+                  {post.postedBy?.userName}
                   {` `}
                   <GoVerified className="text-blue-400 text-md" />
                 </p>
                 <p className="capitalize font-medium text-xs text-gray-400 hidden md:block">
-                  {post.postedBy.userName}
+                  {post.postedBy?.userName}
                 </p>
               </div>
             </Link>
@@ -73,12 +73,12 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
           }}
           className="rounded-3xl"
         >
-          <Link href="/">
+          <Link href={`/detail/${post._id}`}>
             <video
               loop
               ref={videoRef}
               src={post.video.asset.url}
-              className="lg:w-[600px] h-[300px] md:h-[360px] lg:h-[500px] w-[200px] rounded-2xl cursor-pointer bg-gray-200"
+              className="lg:w-[400px] h-[300px] md:h-[400px] lg:h-[630px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
             ></video>
           </Link>
           {isHover && (

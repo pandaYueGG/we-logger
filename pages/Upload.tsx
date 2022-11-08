@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import useAuthStore from "../store/authStore";
@@ -15,6 +15,14 @@ const Upload = () => {
     SanityAssetDocument | undefined
   >();
   const [wrongFileType, setWrongFileType] = useState(false);
+
+  const [caption, setCaption] = useState("");
+  const [category, setCategory] = useState(topics[0].name);
+  const [savingPost, setSavingPost] = useState(false);
+  const [error, setError] = useState("");
+
+  const { userProfile }: { userProfile: any } = useAuthStore();
+  const router = useRouter();
 
   const uploadVideo = async (e: any) => {
     const selectedFile = e.target.files[0];
@@ -33,6 +41,35 @@ const Upload = () => {
     } else {
       setIsLoading(false);
       setWrongFileType(true);
+    }
+  };
+
+  const handlePost = async () => {
+    console.log(caption, videoAsset.url, category);
+    if (caption && videoAsset?._id && category) {
+      setSavingPost(true);
+
+      const document = {
+        _type: "post",
+        caption,
+        video: {
+          _type: "file",
+          asset: {
+            _type: "reference",
+            _ref: videoAsset?._id,
+          },
+        },
+        userId: userProfile?._id,
+        posetedBy: {
+          _type: "postedBy",
+          _ref: userProfile?._id,
+        },
+        topic: category,
+      };
+      console.log("document:", document);
+
+      await axios.post("http://localhost:3000/api/post", document);
+      router.push("/");
     }
   };
 
@@ -105,12 +142,12 @@ const Upload = () => {
           <input
             className="rounded outline-none text-md border-2 border-gray-200 p-2"
             type="text"
-            value=""
-            onChange={() => {}}
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
           />
           <label className="text-md font-medium">Choose a Tag</label>
           <select
-            onChange={() => {}}
+            onChange={(e) => setCategory(e.target.value)}
             className="outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
           >
             {topics.map((topic) => (
@@ -125,15 +162,16 @@ const Upload = () => {
           </select>
           <div className="flex gap-6 mt-10">
             <button
-              onChange={() => {}}
+              onClick={() => {}}
               type="button"
               className="border-gray-200 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
             >
               Discard
             </button>
             <button
+              disabled={videoAsset?.url ? false : true}
               type="button"
-              onChange={() => {}}
+              onClick={handlePost}
               className="bg-[#00f2ea] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
             >
               Post
