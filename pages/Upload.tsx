@@ -6,6 +6,7 @@ import { client } from "../utils/client";
 import { IoMdCloudUpload } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
 import { SanityAssetDocument } from "@sanity/client";
+import { BASE_URL } from "../utils";
 
 import { topics } from "../utils/seeds";
 
@@ -68,7 +69,7 @@ const Upload = () => {
       };
       console.log("document:", document);
 
-      await axios.post("http://localhost:3000/api/post", document);
+      await axios.post(`${BASE_URL}/api/post`, document);
       router.push("/");
     }
   };
