@@ -8,13 +8,22 @@ import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import axios from "axios";
 
 import { BASE_URL } from "../../utils";
+import { Video } from "../../types";
 
-const Detail = () => {
+interface IProps {
+  postDetails: Video;
+}
+
+const Detail = ({ postDetails }: IProps) => {
   return <div>detail</div>;
 };
 
-export const getServerSideProps = async ({ params: { id } }) => {
-  const { data } = await axios.get(`${BASE_URL}/api/post`);
+export const getServerSideProps = async ({
+  params: { id },
+}: {
+  params: { id: string };
+}) => {
+  const { data } = await axios.get(`${BASE_URL}/api/post/${id}`);
 
   return {
     props: { postDetails: data },
