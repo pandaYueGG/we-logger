@@ -36,7 +36,7 @@ module.exports = {
       },
       backgroundImage: {
         "blurred-img":
-          "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaaJ7s4lqcBF4IDROVPzrlL5fexcwRmDlnuEYQenWTt1DejFY5kmYDref2a0Hp2eE4aw&usqp=CAU')",
+          "url('https://images.unsplash.com/photo-1554050857-c84a8abdb5e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60')",
       },
     },
   },
